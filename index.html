@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>aubannerJS demo</title>
+</head>
+<body>
+  <div id="aubannerJS">
+    <div aubanner-banner>
+      <img aubanner-img src="src/img/demo-1.jpeg">
+      <img aubanner-img src="src/img/demo-2.jpeg">
+      <img aubanner-img src="src/img/demo-3.jpeg">
+      <img aubanner-img src="src/img/demo-4.jpeg">
+    </div>
+    <!-- 你可以将aubanner-nav为空来使用自定义样式，选中的样式为.aubanner-select -->
+    <div aubanner-nav="normal">
+      <div aubanner-btn></div>
+      <div aubanner-btn></div>
+      <div aubanner-btn></div>
+      <div aubanner-btn></div>
+    </div>
+    <!-- 你可以将aubanner-pre为空来使用自定义样式 -->
+    <div aubanner-pre="normal">
+      <div aubanner-left></div>
+      <div aubanner-right></div>
+    </div>
+  </div>
+
+
+  <script src="build/aubanner.min.js"></script>
+  <script type="text/javascript">
+    aubanner("#aubannerJS", {
+      // 如果单独设置一项，则另一项会百分比缩放
+      width : 960 * 1.3,
+      // 每多少ms进行一次动画
+      delay : 5000,
+      // animation
+      time  : '1s',
+      timing: 'ease',
+      // 默认为 none, 可选效果有:
+      // 左滑动 left, 右滑动 right
+      anim  : 'left'
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "aubannerjs",
+  "version": "1.0.0",
+  "description": "一个轻量的轮播图插件",
+  "author": "longlongyu",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  }
+}
