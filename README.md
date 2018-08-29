@@ -37,7 +37,7 @@ HTML部分写上代码
 ```
 
 引入aubannerJS
-```
+``` html
 <script src="build/aubanner.min.js"></script>
 <script type="text/javascript">
   aubanner("#aubannerJS", {
