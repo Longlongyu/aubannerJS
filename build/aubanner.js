@@ -58,13 +58,17 @@
     this.banner = this.elem.querySelector('[aubanner-banner]');
     this.imgs = this.banner.querySelectorAll('[aubanner-img]');
     this.nav = this.elem.querySelector('[aubanner-nav]');
-    this.btns = this.nav.querySelectorAll('[aubanner-btn]');
+    if (this.nav) this.btns = this.nav.querySelectorAll('[aubanner-btn]');
     this.pre = this.elem.querySelector('[aubanner-pre]');
-    this.left = this.pre.querySelector('[aubanner-left]');
-    this.right = this.pre.querySelector('[aubanner-right]');
+    if (this.pre) {
+      this.left = this.pre.querySelector('[aubanner-left]');
+      this.right = this.pre.querySelector('[aubanner-right]');
+    } 
     this.curr = this.imgs[0];
-    this.select = this.btns[0];
-    this.select.classList.add("aubanner-select");
+    if (this.btns) {
+      this.select = this.btns[0];
+      this.select.classList.add("aubanner-select");
+    }
 
     this.animat = function(anim, num) {
       self.curr = train(anim, self.curr, self.imgs, num);
@@ -91,12 +95,13 @@
       }
 
       function resetTrans(ms) { // 暂时关闭缓冲动画
-          self.banner.style.transition = '';
+        self.banner.style.transition = '';
         setTimeout(function() {
           self.banner.style.transition = self.bannertemp;
         }, ms);
       }
       function setNavSelect(pos) {
+        if (!self.btns) return;
         self.btns.forEach(function(e) {
           e.classList.remove("aubanner-select");
           if (self.nav.getAttribute('aubanner-nav') == 'normal') {
@@ -133,7 +138,7 @@
       });
     }
 
-    { // 初始化nav样式
+    if (this.nav) { // 初始化nav样式
       if (this.nav.getAttribute('aubanner-nav') === 'normal') {
         this.nav.style.width = '100%';
         this.nav.style.position = 'absolute';
@@ -142,7 +147,7 @@
         this.nav.style.textAlign = 'center';
       }
     }
-    { // 初始化nav按钮
+    if (this.nav) { // 初始化nav按钮
       var btns_count = 1; // 给按钮队列进行排号的计数器
       this.btns.forEach(function(e) {
         e.setAttribute('aubanner-btn', btns_count++);
@@ -178,7 +183,7 @@
       });
     }
 
-    { // 初始化left&&right按钮
+    if (this.pre) { // 初始化left&&right按钮
       this.pre.querySelectorAll('[aubanner-left],[aubanner-right]')
       .forEach(function(e) {
         if (self.pre.getAttribute('aubanner-pre') === 'normal') {
@@ -206,27 +211,31 @@
         
       });
       // right按钮
-      this.right.style.left = 0;
-      this.right.innerText = '<';
-      this.right.addEventListener('click', function rightclick(event) {
-        var result = 'none';
-        if (anim === 'left' || anim === 'right' || anim === 'none') {
-          result = 'right';
-        }
-        self.animat(result, 1);
-        setTimeout(reset, 0);
-      });
+      if (this.right) {
+        this.right.style.left = 0;
+        this.right.innerText = '<';
+        this.right.addEventListener('click', function rightclick(event) {
+          var result = 'none';
+          if (anim === 'left' || anim === 'right' || anim === 'none') {
+            result = 'right';
+          }
+          self.animat(result, 1);
+          setTimeout(reset, 0);
+        });
+      }
       // left按钮
-      this.left.style.right = 0;
-      this.left.innerText = '>';
-      this.left.addEventListener('click', function leftclick(event) {
-        var result = 'none';
-        if (anim === 'left' || anim === 'right' || anim === 'none') {
-          result = 'left';
-        }
-        self.animat(result, 1);
-        setTimeout(reset, 0);
-      });
+      if (this.left) {
+        this.left.style.right = 0;
+        this.left.innerText = '>';
+        this.left.addEventListener('click', function leftclick(event) {
+          var result = 'none';
+          if (anim === 'left' || anim === 'right' || anim === 'none') {
+            result = 'left';
+          }
+          self.animat(result, 1);
+          setTimeout(reset, 0);
+        });
+      }
     }
 
     { // 初始化main样式
